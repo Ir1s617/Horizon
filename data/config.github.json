@@ -16,15 +16,15 @@
     "default_profile": "general-news",
     "profile_settings": {
       "tech-news": {
-        "threshold": 7.0,
+        "threshold": 6.5,
         "topic_dedup": true
       },
       "finance-news": {
-        "threshold": 7.0,
+        "threshold": 6.5,
         "topic_dedup": true
       },
       "general-news": {
-        "threshold": 7.5,
+        "threshold": 6.5,
         "topic_dedup": true
       }
     }
@@ -196,7 +196,7 @@
   },
 
   "digest": {
-    "max_items": 25,
+    "max_items": 30,
 
     "profile_order": [
       "general-news",
@@ -207,7 +207,7 @@
     "category_groups": {
       "ai": {
         "name": "AI",
-        "limit": 5,
+        "limit": 6,
         "categories": [
           "ai"
         ]
@@ -215,7 +215,7 @@
 
       "tech": {
         "name": "Technology",
-        "limit": 5,
+        "limit": 6,
         "categories": [
           "tech",
           "china-tech"
@@ -224,7 +224,7 @@
 
       "finance": {
         "name": "Finance",
-        "limit": 5,
+        "limit": 6,
         "categories": [
           "finance"
         ]
@@ -232,7 +232,7 @@
 
       "china": {
         "name": "China",
-        "limit": 5,
+        "limit": 6,
         "categories": [
           "china"
         ]
@@ -240,7 +240,7 @@
 
       "world": {
         "name": "World",
-        "limit": 5,
+        "limit": 6,
         "categories": [
           "world"
         ]
