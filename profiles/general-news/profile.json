@@ -1,0 +1,37 @@
+{
+  "id": "general-news",
+  "name": "General Important News",
+  "display_names": {
+    "zh": "国内外要闻"
+  },
+  "match": "match.md",
+  "analysis": "analysis.md",
+  "content": {
+    "analysis_max_chars": 4000,
+    "enrichment_max_chars": 8000,
+    "sampling": "prefix"
+  },
+  "enrichment": {
+    "prompt": "enrichment.md",
+    "blocks": [
+      {
+        "id": "summary",
+        "type": "section",
+        "tools": [],
+        "primary": true
+      },
+      {
+        "id": "background",
+        "type": "section",
+        "tools": [],
+        "optional": true
+      },
+      {
+        "id": "impact",
+        "type": "section",
+        "tools": [],
+        "optional": true
+      }
+    ]
+  }
+}
