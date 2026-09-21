@@ -1,34 +1,193 @@
 {
   "ai": {
-    "provider": "deepseek",
-    "model": "deepseek-chat",
-    "api_key_env": "DEEPSEEK_API_KEY",
-    "base_url": "https://api.deepseek.com",
-    "temperature": 0.3,
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "api_key_env": "GOOGLE_API_KEY",
+    "temperature": 0.2,
     "max_tokens": 4096,
     "languages": ["zh"],
-    "throttle_sec": 1,
+    "throttle_sec": 5,
     "analysis_concurrency": 1,
     "enrichment_concurrency": 1
   },
 
   "processing": {
     "profiles_dir": "profiles",
-    "default_profile": "tech-news",
+    "default_profile": "general-news",
     "profile_settings": {
       "tech-news": {
-        "threshold": 6.5,
+        "threshold": 7.0,
+        "topic_dedup": true
+      },
+      "finance-news": {
+        "threshold": 7.0,
+        "topic_dedup": true
+      },
+      "general-news": {
+        "threshold": 7.5,
         "topic_dedup": true
       }
     }
   },
 
   "sources": {
+    "github": [],
+
     "hackernews": {
       "enabled": true,
-      "fetch_top_stories": 10,
-      "min_score": 50,
+      "fetch_top_stories": 25,
+      "min_score": 100,
+      "category": "tech",
       "profile": "tech-news"
+    },
+
+    "rss": [
+      {
+        "name": "36Kr",
+        "url": "https://36kr.com/feed",
+        "enabled": true,
+        "category": "china-tech",
+        "profile": "tech-news"
+      },
+
+      {
+        "name": "Xinhua China",
+        "url": "https://www.xinhuanet.com/english/rss/chinarss.xml",
+        "enabled": true,
+        "category": "china",
+        "profile": "general-news"
+      },
+
+      {
+        "name": "Xinhua World",
+        "url": "https://www.xinhuanet.com/english/rss/worldrss.xml",
+        "enabled": true,
+        "category": "world",
+        "profile": "general-news"
+      },
+
+      {
+        "name": "Xinhua Business",
+        "url": "https://www.xinhuanet.com/english/rss/businessrss.xml",
+        "enabled": true,
+        "category": "finance",
+        "profile": "finance-news"
+      },
+
+      {
+        "name": "Xinhua Science and Technology",
+        "url": "https://www.xinhuanet.com/english/rss/scirss.xml",
+        "enabled": true,
+        "category": "tech",
+        "profile": "tech-news"
+      },
+
+      {
+        "name": "CNBC Finance",
+        "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",
+        "enabled": true,
+        "category": "finance",
+        "profile": "finance-news"
+      },
+
+      {
+        "name": "Google News AI",
+        "url": "https://news.google.com/rss/search?q=artificial+intelligence+OR+OpenAI+OR+Anthropic+OR+DeepMind+OR+NVIDIA&hl=en-US&gl=US&ceid=US:en",
+        "enabled": true,
+        "category": "ai",
+        "profile": "tech-news"
+      },
+
+      {
+        "name": "Google News China",
+        "url": "https://news.google.com/rss/search?q=%E4%B8%AD%E5%9B%BD+%E7%BB%8F%E6%B5%8E+OR+%E7%A7%91%E6%8A%80+OR+%E6%94%BF%E7%AD%96+OR+%E9%87%8D%E8%A6%81%E6%96%B0%E9%97%BB&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "enabled": true,
+        "category": "china",
+        "profile": "general-news"
+      },
+
+      {
+        "name": "Google News World",
+        "url": "https://news.google.com/rss/search?q=world+news+OR+geopolitics+OR+conflict+OR+election+OR+disaster&hl=en-US&gl=US&ceid=US:en",
+        "enabled": true,
+        "category": "world",
+        "profile": "general-news"
+      },
+
+      {
+        "name": "Google News Finance",
+        "url": "https://news.google.com/rss/search?q=Federal+Reserve+OR+inflation+OR+global+economy+OR+markets+OR+China+economy&hl=en-US&gl=US&ceid=US:en",
+        "enabled": true,
+        "category": "finance",
+        "profile": "finance-news"
+      }
+    ],
+
+    "reddit": {
+      "enabled": false,
+      "subreddits": [],
+      "users": [],
+      "fetch_comments": 0
+    },
+
+    "telegram": {
+      "enabled": false,
+      "channels": []
+    },
+
+    "twitter": {
+      "enabled": false,
+      "mode": "apify",
+      "users": [
+        "OpenAI",
+        "OpenAIDevs",
+        "AnthropicAI",
+        "GoogleDeepMind",
+        "nvidia"
+      ],
+      "keywords": [],
+      "fetch_limit": 10,
+      "category": "ai",
+      "profile": "tech-news",
+      "fetch_reply_text": false,
+      "max_replies_per_tweet": 3,
+      "max_tweets_to_expand": 5,
+      "reply_min_likes": 5,
+      "apify_token_env": "APIFY_TOKEN"
+    },
+
+    "openbb": {
+      "enabled": false,
+      "watchlists": []
+    },
+
+    "ossinsight": {
+      "enabled": true,
+      "period": "past_24_hours",
+      "languages": [
+        "All",
+        "Python",
+        "TypeScript"
+      ],
+      "keywords": [
+        "ai",
+        "llm",
+        "agent",
+        "multimodal",
+        "robot"
+      ],
+      "min_stars": 20,
+      "max_items": 10,
+      "category": "tech",
+      "profile": "tech-news"
+    },
+
+    "gdelt": {
+      "enabled": false
+    },
+
+    "google_news": {
+      "enabled": false
     }
   },
 
@@ -37,7 +196,62 @@
   },
 
   "digest": {
-    "max_items": 8,
-    "profile_order": ["tech-news"]
+    "max_items": 25,
+
+    "profile_order": [
+      "general-news",
+      "finance-news",
+      "tech-news"
+    ],
+
+    "category_groups": {
+      "ai": {
+        "name": "AI",
+        "limit": 5,
+        "categories": [
+          "ai"
+        ]
+      },
+
+      "tech": {
+        "name": "Technology",
+        "limit": 5,
+        "categories": [
+          "tech",
+          "china-tech"
+        ]
+      },
+
+      "finance": {
+        "name": "Finance",
+        "limit": 5,
+        "categories": [
+          "finance"
+        ]
+      },
+
+      "china": {
+        "name": "China",
+        "limit": 5,
+        "categories": [
+          "china"
+        ]
+      },
+
+      "world": {
+        "name": "World",
+        "limit": 5,
+        "categories": [
+          "world"
+        ]
+      }
+    },
+
+    "default_group": "other",
+    "default_group_limit": 2
+  },
+
+  "webhook": {
+    "enabled": false
   }
 }
